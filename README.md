@@ -1,12 +1,11 @@
-# Final table with real results inserted
-readme_filled = """
+
 # 🎓 Student Dropout Risk Prediction Using Machine Learning
 
 ---
 
 ## 📌 Overview
 
-This project uses academic, behavioral, and demographic data to predict student dropout risk. Leveraging classical and neural network machine learning techniques, the goal is to proactively identify students at risk of dropping out, enabling institutions to intervene early.
+This project uses academic, behavioral, and demographic data to predict student dropout risk. Leveraging classical and neural network machine learning techniques, the goal is proactively identify students at risk of dropping out, enabling institutions to intervene early.
 
 ---
 
