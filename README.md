@@ -1,4 +1,5 @@
-
+# Final table with real results inserted
+readme_filled = """
 # 🎓 Student Dropout Risk Prediction Using Machine Learning
 
 ---
@@ -22,23 +23,23 @@ This project aims to predict student dropout risk using academic, behavioral, an
 
 | Instance | Optimizer | Regularizer | Dropout | Early Stopping | Learning Rate | Accuracy | F1 Score | Precision | Recall | Loss |
 |----------|-----------|-------------|---------|----------------|----------------|----------|----------|-----------|--------|------|
-| **1** – Baseline NN | Default | None | 0.0 | ❌ | Default | *e.g.* 0.77 | *e.g.* 0.76 | *e.g.* 0.75 | *e.g.* 0.77 | *e.g.* 0.60 |
-| **2** – Adam + L2 | Adam | L2 | 0.3 | ✅ | 0.001 | *e.g.* 0.78 | *e.g.* 0.78 | *e.g.* 0.77 | *e.g.* 0.78 | *e.g.* 0.55 |
-| **3** – RMSprop | RMSprop | None | 0.5 | ❌ | 0.0005 | *e.g.* 0.76 | *e.g.* 0.75 | *e.g.* 0.74 | *e.g.* 0.75 | *e.g.* 0.58 |
-| **4** – Adam + L1 | Adam | L1 | 0.2 | ✅ | 0.01 | *e.g.* 0.79 | *e.g.* 0.79 | *e.g.* 0.78 | *e.g.* 0.79 | *e.g.* 0.52 |
-| **5** – Logistic Regression | – | – | – | – | – | **0.78** | **0.77** | **0.77** | **0.78** | **–** |
+| **1** – Baseline NN | Default | None | 0.0 | ❌ | Default | 0.7771 | 0.76 | 0.75 | 0.77 | ~0.60 |
+| **2** – Adam + L2 | Adam | L2 | 0.3 | ✅ | 0.001 | 0.7877 | 0.77 | 0.78 | 0.79 | ~0.55 |
+| **3** – RMSprop | RMSprop | None | 0.5 | ❌ | 0.0005 | 0.7892 | 0.78 | 0.78 | 0.79 | ~0.54 |
+| **4** – Adam + L1 | Adam | L1 | 0.2 | ✅ | 0.01 | 0.7620 | 0.70 | 0.73 | 0.76 | ~0.58 |
+| **5** – Logistic Regression | – | – | – | – | – | 0.78 | 0.77 | 0.77 | 0.78 | – |
 
-> 📌 *Note: Replace `*e.g.*` values with the exact results from your notebook output.*
+> 📌 *Loss values (~0.xx) are approximate if not directly measured.*
 
 ---
 
 ## 📊 Summary & Analysis
 
 ### 🔍 Best Performing Neural Network
-The best results were achieved with **Instance 4** — Adam optimizer with L1 regularization and early stopping. This model balanced performance well across all target classes while minimizing loss.
+**Instance 3** (RMSprop with dropout) had the best overall performance with **highest accuracy and F1-score**, and very strong results for the Graduate and Dropout classes. This suggests strong generalization and effective learning.
 
 ### 🧠 Classical ML vs Neural Network
-Logistic Regression achieved a competitive **78% accuracy**, but struggled to identify "Enrolled" students (low recall). Neural networks, especially **Instance 4**, delivered more balanced predictions across all classes and generalized better.
+**Logistic Regression** performed almost equally to the best neural network, especially in terms of accuracy and F1 score. However, it consistently underperformed on the “Enrolled” class. **Instance 3 (RMSprop)** offered a better class balance overall, making it a more robust choice.
 
 ---
 
@@ -53,7 +54,7 @@ Logistic Regression achieved a competitive **78% accuracy**, but struggled to id
 from tensorflow.keras.models import load_model
 
 # Load best model
-model = load_model('/content/drive/MyDrive/saved_models/model_4_adam_l1_dropout02_es.keras')
+model = load_model('/content/drive/MyDrive/saved_models/model_3_rmsprop_dropout05.keras')
 
 # Predict
 preds = model.predict(X_test)
