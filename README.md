@@ -6,7 +6,7 @@ readme_filled = """
 
 ## 📌 Overview
 
-This project aims to predict student dropout risk using academic, behavioral, and demographic data. Leveraging classical and neural network machine learning techniques, the goal is to proactively identify students at risk of dropping out, enabling institutions to intervene early.
+This project uses academic, behavioral, and demographic data to predict student dropout risk. Leveraging classical and neural network machine learning techniques, the goal is to proactively identify students at risk of dropping out, enabling institutions to intervene early.
 
 ---
 
