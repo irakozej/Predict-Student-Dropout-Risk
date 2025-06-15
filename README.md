@@ -1,4 +1,5 @@
-# Create a professional README.md content with formatted Markdown
+# Re-create the professional README.md content after environment reset
+
 readme_content = """
 # 🎓 Student Dropout Risk Prediction Using Machine Learning
 
