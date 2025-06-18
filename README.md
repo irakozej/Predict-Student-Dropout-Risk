@@ -5,7 +5,7 @@
 
 ## 📌 Overview
 
-This project uses academic, behavioral, and demographic data to predict student dropout risk. Leveraging classical and neural network machine learning techniques, the goal is proactively identify students at risk of dropping out, enabling institutions to intervene early.
+This project aims to predict student dropout risk using academic, behavioral, and demographic data. Leveraging classical and neural network machine learning techniques, the goal is to proactively identify students at risk of dropping out, enabling institutions to intervene early.
 
 ---
 
@@ -20,40 +20,47 @@ This project uses academic, behavioral, and demographic data to predict student 
 
 ## 🔧 Model Configurations and Results
 
-| Instance | Optimizer | Regularizer | Dropout | Early Stopping | Learning Rate | Accuracy | F1 Score | Precision | Recall | Loss |
-|----------|-----------|-------------|---------|----------------|----------------|----------|----------|-----------|--------|------|
-| **1** – Baseline NN | Default | None | 0.0 | ❌ | Default | 0.7771 | 0.76 | 0.75 | 0.77 | ~0.60 |
-| **2** – Adam + L2 | Adam | L2 | 0.3 | ✅ | 0.001 | 0.7877 | 0.77 | 0.78 | 0.79 | ~0.55 |
-| **3** – RMSprop | RMSprop | None | 0.5 | ❌ | 0.0005 | 0.7892 | 0.78 | 0.78 | 0.79 | ~0.54 |
-| **4** – Adam + L1 | Adam | L1 | 0.2 | ✅ | 0.01 | 0.7620 | 0.70 | 0.73 | 0.76 | ~0.58 |
-| **5** – Logistic Regression | – | – | – | – | – | 0.78 | 0.77 | 0.77 | 0.78 | – |
+| Instance | Optimizer | Regularizer | Dropout | Early Stopping | Learning Rate | Accuracy | F1 Score | Precision | Recall | Notes |
+|----------|-----------|-------------|---------|----------------|----------------|----------|----------|-----------|--------|-------|
+| **1** – Baseline NN | Adam | None | 0.0 | ❌ | Default | 0.7590 | 0.76 | 0.76 | 0.76 | No optimization |
+| **2** – Adam + L2 | Adam | L2 | 0.3 | ✅ | 0.001 | **0.7937** | **0.78** | **0.78** | **0.79** | Best performance |
+| **3** – RMSprop | RMSprop | None | 0.5 | ❌ | 0.0005 | 0.7846 | 0.78 | 0.78 | 0.78 | Solid alternative |
+| **4** – Adam + L1 | Adam | L1 | 0.2 | ✅ | 0.01 | 0.7530 | 0.69 | 0.67 | 0.75 | Weak Enrolled recall |
+| **5** – Logistic Regression | – | – | – | – | – | 0.7800 | 0.77 | 0.77 | 0.78 | Classical ML baseline |
 
-> 📌 *Loss values (~0.xx) are approximate if not directly measured.*
+> 📌 *Metrics are based on weighted averages from the classification reports. All models were evaluated on the same test set.*
 
 ---
 
 ## 📊 Summary & Analysis
 
-### 🔍 Best Performing Neural Network
-**Instance 3** (RMSprop with dropout) had the best overall performance with **highest accuracy and F1-score**, and very strong results for the Graduate and Dropout classes. This suggests strong generalization and effective learning.
+### 🥇 Best Performing Neural Network
+The most effective model was **Instance 2**, which used:
+- Adam optimizer
+- L2 regularization
+- Dropout (0.3)
+- EarlyStopping
 
-### 🧠 Classical ML vs Neural Network
-**Logistic Regression** performed almost equally to the best neural network, especially in terms of accuracy and F1 score. However, it consistently underperformed on the “Enrolled” class. **Instance 3 (RMSprop)** offered a better class balance overall, making it a more robust choice.
+It achieved **79.4% accuracy** with excellent performance across all target classes, including a significant boost in the often-challenging "Enrolled" class.
+
+### 🤖 Classical ML Comparison
+Logistic Regression (Model 5) performed nearly as well, achieving **78% accuracy**, but like other models, it struggled to identify enrolled students accurately. Neural Networks, especially the optimized ones, provided better class balance and prediction consistency.
 
 ---
 
 ## 🏁 How to Run the Notebook
 
 1. Upload the dataset to your Google Drive.
-2. Open the provided `notebook.ipynb` in **Google Colab**.
-3. Run all cells. Models will be trained and saved to `/content/drive/MyDrive/saved_models/`.
-4. To make predictions from a saved model, use:
+2. Open the `notebook.ipynb` in **Google Colab**.
+3. Run all cells. Models will be trained and saved in:  
+   `/content/drive/MyDrive/saved_models/`
+4. To make predictions from the best saved model, run:
 
 ```python
 from tensorflow.keras.models import load_model
 
-# Load best model
-model = load_model('/content/drive/MyDrive/saved_models/model_3_rmsprop_dropout05.keras')
+# Load the best model
+model = load_model('/content/drive/MyDrive/saved_models/model_2_adam_l2_dropout03_es.keras')
 
 # Predict
 preds = model.predict(X_test)
